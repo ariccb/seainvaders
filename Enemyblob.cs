@@ -6,8 +6,7 @@ namespace seainvaders
 {
     class Enemyblob
     {
- 
-        public List <Crabbypatty> crabs;
+        public List<Enemy> enemies;
         public int startingx = 16;
         public int startingy = 120;
         public int frameCount = 0;
@@ -17,43 +16,59 @@ namespace seainvaders
 
         public Enemyblob()
         {
-            crabs = new List<Crabbypatty>();
-            for (int i = 0; i < 5; i++)
+            enemies = new List<Enemy>();
+            
+            for (int i = 0; i < 3; i++)
             {
                 startingx = 16;
                 for (int j = 0; j < 11; j++)
                 {
-                    crabs.Add(new Crabbypatty(startingx, startingy));
+                    enemies.Add(new Crabbypatty(startingx, startingy));
                     
                     startingx += 16;
                     
+                }
+                startingy += 16;
+
+            }
+            for (int i = 3; i < 5; i++)
+            {
+                startingx = 16;
+                for (int j = 0; j < 11; j++)
+                {
+                    enemies.Add(new Octopus(startingx, startingy));
+
+                    startingx += 16;
                 }
                 startingy += 16;
             }
         }
         public void Update()
         {
-            if(crabs.Count > 0)
+            /*int move = frameCount % (crabs.Count + octopi.Count); // gets the remainder
+            bool hitWall;
+            if (crabs.Count > 0)
             {
-                
-                int move = frameCount % crabs.Count;
-                bool hitWall = crabs[move].Move(leftToRight);
-                if (hitWall)
+                if (move < crabs.Count )
                 {
-                    moveDown = true;
-                }
-                if (move == crabs.Count - 1 && moveDown)
-                {
-                    foreach(Crabbypatty crab in crabs)
+                    hitWall = crabs[move].Move(leftToRight);
+                    if (hitWall)
                     {
-                        crab.y += crab.yMove;
+                        moveDown = true;
                     }
-                    moveDown = false;
-                    leftToRight = !leftToRight;
+                    if (move == crabs.Count - 1 && moveDown)
+                    {
+                        foreach (Crabbypatty crab in crabs)
+                        {
+                            crab.y += crab.yMove;
+                        }
+                        moveDown = false;
+                        leftToRight = !leftToRight;
+                    }
                 }
-                frameCount++;
-
             }
+           
+            frameCount++;*/
         }
 
         public void Render(Graphics graphics)
@@ -63,10 +78,12 @@ namespace seainvaders
            // {
            //     crabs[i].Render(graphics);
            // }
-           foreach(Crabbypatty crab in crabs)
+           foreach(Enemy enemy in enemies)
             {
-                crab.Render(graphics);
+                enemy.Render(graphics);
+               
             }
+                    
            
         }
     }

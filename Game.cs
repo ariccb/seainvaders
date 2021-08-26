@@ -67,7 +67,9 @@ namespace seainvaders
             {
                 graphics.DrawString("Computer Wins!", bigscoreFont, new SolidBrush(Color.White), new PointF(((courseWidth / 2) - 200), (courseHeight / 2)));
             }
+            blob.Update();
             blob.Render(graphics);
+            
 
         }
 
