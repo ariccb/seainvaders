@@ -42,7 +42,7 @@ namespace seainvaders
                         spriteArmsDown.SetPixel(j, i, Color.DarkSeaGreen);
                     }
                 }
-            }
+            } // Assigning graphics to the position0 bitmap
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -56,7 +56,7 @@ namespace seainvaders
                         spriteArmsUp.SetPixel(j, i, Color.DarkSeaGreen);
                     }
                 }
-            }
+            } // Assigning graphics to the position1 bitmap
             sprite = spriteArmsDown;
 
 
@@ -64,27 +64,17 @@ namespace seainvaders
         }
         public bool Move(bool leftToRight)
         {
-
             activeSprite = !activeSprite;
-            if (leftToRight)
-            {
-                x += xMove;
-            }
-            else
-            {
-                x -= xMove;
-            }
-            if (x <= 0)
-            {
-                return true;
-            }
-            if (x >= 208)
-            {
-                return true;
-            }
-            return false;
 
+            if (leftToRight) { x += xMove; }
+            else { x -= xMove; }
+
+            if (x <= 0) { return true; }
+            if (x >= 208) { return true; }
+
+            return false;
         }
+
         public void Update()
         {
             if (activeSprite)

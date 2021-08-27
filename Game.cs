@@ -19,12 +19,14 @@ namespace seainvaders
         public int leftScore = 0;
         public int rightScore = 0;
         public Enemyblob blob;
+        public Player player;
 
         public Game(Canvas canvas)
         {
             courseWidth = 700;
             courseHeight = 700;
             blob = new Enemyblob();
+            player = new Player();
             window = canvas;
             canvas.Paint += Canvas_Paint; // this is listening for when the window is painted
            
@@ -38,15 +40,20 @@ namespace seainvaders
 
         private void Canvas_KeyRelease(object sender, KeyEventArgs e)
         {
-           
+            if (e.KeyCode == Keys.A)
+            { player.vx = 0; }                // if the player releases the A key, the velocity is set to 0
+            else if (e.KeyCode == Keys.D)
+            { player.vx = 0; }                // if the player releases the A key, the velocity is set to 0
         }
+        //Key release listener and logic.
 
         private void Canvas_KeyPress(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode == Keys.A)
+            { player.vx = -2; }             // if the player presses the A key, the velocity is set to -2 (moves to the left at "2-speed")
+            else if (e.KeyCode == Keys.D)
+            { player.vx = 2; }              // if the player presses the A key, the velocity is set to 2 (moves to the right at "2-speed")
         }
-
-
 
         private void Canvas_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
@@ -68,7 +75,9 @@ namespace seainvaders
                 graphics.DrawString("Computer Wins!", bigscoreFont, new SolidBrush(Color.White), new PointF(((courseWidth / 2) - 200), (courseHeight / 2)));
             }
             blob.Update();
+            player.Update();
             blob.Render(graphics);
+            player.Render(graphics);
             
 
         }
