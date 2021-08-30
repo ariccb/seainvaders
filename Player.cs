@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace seainvaders
 {
-    class Player
+    class Player : Entity
     {
         public char[,] graphic =
             {
@@ -21,24 +21,31 @@ namespace seainvaders
                 { '0','0','0','0','0','0','0','0','0','0','0','0','0'},
             };
 
-        public int x;
-        public int y;
         public int vx;
-        public int Width;
-        public int Height;
-        public Bitmap sprite;
+        public override int height
+        {
+            get
+            {
+                return 8;
+            }
+        }
+        public override int width
+        {
+            get
+            {
+                return 13;
+            }
+        }
 
         public Player()
         {
             vx = 0;
             y = 211;
             x = 105;
-            Width = 13;
-            Height = 8;
-            sprite = new Bitmap(Width, Height);
-            for (int i = 0; i < Height; i++)
+            sprite = new Bitmap(width, height); // homework - try to abstract out this code into all other classes
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = 0; j < width; j++)
                 {
                     if (graphic[i, j] == '.')
                     {
@@ -51,13 +58,22 @@ namespace seainvaders
                 }
             }
         }
-        public void Update()
+        public override void Update()
         {
+            if (Game.keys.Contains("a") && x > 0)
+            {
+                vx = -2;
+            }
+            else if (Game.keys.Contains("d") && x < 223)
+            {
+                vx = 2;
+            }
+            else
+            {
+                vx = 0;
+            }
             x += vx;
         }
-        public void Render(Graphics graphics)
-        {
-            graphics.DrawImage(sprite, x, y);
-        }
+     
     }
 }

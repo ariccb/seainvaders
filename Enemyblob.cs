@@ -77,7 +77,9 @@ namespace seainvaders
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update();
+
             }
+
             frameCount++;
         }
 

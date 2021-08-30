@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 
 namespace seainvaders
 {
-    abstract class Enemy // difference to regular class is: Can't make new ones - can't create an 'instance' of an abstract class
+    abstract class Enemy : Entity // difference to regular class is: Can't make new ones - can't create an 'instance' of an abstract class
     {
         public abstract char[,] graphic0 { get; } // this is called a "get" function, this is how to get "inheritance"
         public abstract char[,] graphic1 { get; }
 
         public Bitmap spriteArmsDown;
         public Bitmap spriteArmsUp;
-        public Bitmap sprite;
-        public int x;
-        public int y;
-        public abstract int width { get; }
-        public abstract int height { get; }
         public bool activeSprite;
         public int xMove = 2;
         public int yMove = 8;
@@ -59,8 +54,6 @@ namespace seainvaders
             } // Assigning graphics to the position1 bitmap
             sprite = spriteArmsDown;
 
-
-
         }
         public bool Move(bool leftToRight)
         {
@@ -75,7 +68,7 @@ namespace seainvaders
             return false;
         }
 
-        public void Update()
+        public override void Update()
         {
             if (activeSprite)
             {
@@ -87,9 +80,6 @@ namespace seainvaders
 
             }
         }
-        public void Render(Graphics graphics)
-        {
-            graphics.DrawImage(sprite, x, y);
-        }
+       
     }
 }

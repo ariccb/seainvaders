@@ -20,6 +20,8 @@ namespace seainvaders
         public int rightScore = 0;
         public Enemyblob blob;
         public Player player;
+        // adding too many static methods is considered 'bad coding'. Static methods should be used for things that are global for a class.
+        public static HashSet<string> keys;
 
         public Game(Canvas canvas)
         {
@@ -28,6 +30,7 @@ namespace seainvaders
             blob = new Enemyblob();
             player = new Player();
             window = canvas;
+            keys = new HashSet<string>();
             canvas.Paint += Canvas_Paint; // this is listening for when the window is painted
            
             gameLoopThread = new Thread(GameLoop);
@@ -38,21 +41,22 @@ namespace seainvaders
 
         }
 
+
         private void Canvas_KeyRelease(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A)
-            { player.vx = 0; }                // if the player releases the A key, the velocity is set to 0
+            { keys.Remove("a"); }                // if the player releases the A key, the velocity is set to 0
             else if (e.KeyCode == Keys.D)
-            { player.vx = 0; }                // if the player releases the A key, the velocity is set to 0
+            { keys.Remove("d"); }                // if the player releases the A key, the velocity is set to 0
         }
         //Key release listener and logic.
 
         private void Canvas_KeyPress(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A)
-            { player.vx = -2; }             // if the player presses the A key, the velocity is set to -2 (moves to the left at "2-speed")
+            { keys.Add("a"); }             // if the player presses the A key, the velocity is set to -2 (moves to the left at "2-speed")
             else if (e.KeyCode == Keys.D)
-            { player.vx = 2; }              // if the player presses the A key, the velocity is set to 2 (moves to the right at "2-speed")
+            { keys.Add("d"); }              // if the player presses the A key, the velocity is set to 2 (moves to the right at "2-speed")
         }
 
         private void Canvas_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -81,6 +85,8 @@ namespace seainvaders
             
 
         }
+
+        
 
        public void GameLoop()
         {
