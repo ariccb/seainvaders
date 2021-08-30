@@ -58,7 +58,7 @@ namespace seainvaders
             int move = frameCount % enemies.Count; // gets the remainder
             bool hitWall;
             if (enemies.Count > 0)
-            {  
+            {
                 hitWall = enemies[move].Move(leftToRight);
                 if (hitWall)
                 {
@@ -81,22 +81,6 @@ namespace seainvaders
             }
 
             frameCount++;
-        }
-
-        public void Render(Graphics graphics)
-        {
-           //* //this is the same code as below
-           // for(int i = 0; i < enemies.Count; i++)
-           // {
-           //     enemies[i].Render(graphics);
-           // }
-           foreach(Enemy enemy in enemies)
-            {
-                enemy.Render(graphics);
-               
-            }
-                    
-           
         }
     }
 }

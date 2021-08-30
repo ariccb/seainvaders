@@ -22,6 +22,7 @@ namespace seainvaders
             };
 
         public int vx;
+        public Bullet bullet;
         public override int height
         {
             get
@@ -37,7 +38,7 @@ namespace seainvaders
             }
         }
 
-        public Player()
+        public Player() : base()
         {
             vx = 0;
             y = 211;
@@ -60,11 +61,11 @@ namespace seainvaders
         }
         public override void Update()
         {
-            if (Game.keys.Contains("a") && x > 0)
+            if (Game.keys.Contains("left") && x > 0)
             {
                 vx = -2;
             }
-            else if (Game.keys.Contains("d") && x < 223)
+            else if (Game.keys.Contains("right") && x < 223)
             {
                 vx = 2;
             }
@@ -73,6 +74,15 @@ namespace seainvaders
                 vx = 0;
             }
             x += vx;
+            // movement logic
+            
+            if (Game.keys.Contains("space"))
+            {
+                bullet = new Bullet();
+                bullet.x = x + 6; // to align to centre of player
+                bullet.y = y - 4; // because we want the top of the bullet at the 'start' of the player
+            }
+            // shooting logic
         }
      
     }

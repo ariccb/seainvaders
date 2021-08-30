@@ -18,7 +18,7 @@ namespace seainvaders
         public int xMove = 2;
         public int yMove = 8;
 
-        public Enemy(int x, int y)
+        public Enemy(int x, int y) : base() //this calls the constructor for the parent class
         {
             this.x = x;
             this.y = y;

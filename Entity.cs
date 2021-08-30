@@ -15,8 +15,12 @@ namespace seainvaders
         public int y;
         public Bitmap sprite;
 
+        public Entity()
+        {
+            Game.EntityList.Add(this);
+        }
 
-        public abstract void Update(); // this tells classes inheriting "entity" that there needs to be an Update() function at the bottom of their script.
+        public abstract void Update(); // this tells classes inheriting "entity" that there needs to be an Update() function at the bottom of their script
 
         public void Render(Graphics graphics)
         {
