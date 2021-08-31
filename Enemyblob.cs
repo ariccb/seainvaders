@@ -52,13 +52,25 @@ namespace seainvaders
                 }
                 startingy += 16;
             } // Creates Octopus sprites on the fourth and fifth rows, as defined by the range of "i".
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Deleted += Enemyblob_Deleted; //this is the event listener 
+            }
         }
+
+        private void Enemyblob_Deleted(object sender, EventArgs e)
+        {
+            enemies.Remove((Enemy) sender); // static cast this sender as an Enemy 
+        }
+
         public void Update()
         {
-            int move = frameCount % enemies.Count; // gets the remainder
+            
             bool hitWall;
             if (enemies.Count > 0)
             {
+                int move = frameCount % enemies.Count; // gets the remainder
                 hitWall = enemies[move].Move(leftToRight);
                 if (hitWall)
                 {

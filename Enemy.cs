@@ -55,6 +55,12 @@ namespace seainvaders
             sprite = spriteArmsDown;
 
         }
+
+        public void Hit()
+        {
+            Delete();
+        }
+
         public bool Move(bool leftToRight)
         {
             activeSprite = !activeSprite;

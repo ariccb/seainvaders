@@ -77,13 +77,21 @@ namespace seainvaders
             // movement logic
             
             if (Game.keys.Contains("space"))
-            {
-                bullet = new Bullet();
-                bullet.x = x + 6; // to align to centre of player
-                bullet.y = y - 4; // because we want the top of the bullet at the 'start' of the player
+            { 
+                if (bullet == null)
+                {
+                    bullet = new Bullet();
+                    bullet.x = x + 6; // to align to centre of player
+                    bullet.y = y - 4; // because we want the top of the bullet at the 'start' of the player
+                    bullet.Deleted += Bullet_Deleted; //Bullet_Deleted is an event listener
+                }
             }
             // shooting logic
         }
-     
+
+        private void Bullet_Deleted(object sender, EventArgs e)
+        {
+            bullet = null; //this deletes the bullet
+        }
     }
 }
