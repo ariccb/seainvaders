@@ -47,22 +47,6 @@ namespace seainvaders
                 return val;
             }
         }
-        public override int height
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int width
-        {
-            get
-            {
-                return 12;
-            }
-        }
-
-
         public Octopus(int x, int y) : base(x, y)
         {
         }

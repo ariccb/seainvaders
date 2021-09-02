@@ -22,38 +22,9 @@ namespace seainvaders
         {
             this.x = x;
             this.y = y;
-            spriteArmsDown = new Bitmap(width, height);
-            spriteArmsUp = new Bitmap(width, height);
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    if (graphic0[i, j] == '.')
-                    {
-                        spriteArmsDown.SetPixel(j, i, Color.Transparent);
-                    }
-                    else
-                    {
-                        spriteArmsDown.SetPixel(j, i, Color.DarkSeaGreen);
-                    }
-                }
-            } // Assigning graphics to the position0 bitmap
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    if (graphic1[i, j] == '.')
-                    {
-                        spriteArmsUp.SetPixel(j, i, Color.Transparent);
-                    }
-                    else
-                    {
-                        spriteArmsUp.SetPixel(j, i, Color.DarkSeaGreen);
-                    }
-                }
-            } // Assigning graphics to the position1 bitmap
+            spriteArmsDown = CharArrayToBitmap(graphic0);
+            spriteArmsUp = CharArrayToBitmap(graphic1);
             sprite = spriteArmsDown;
-
         }
 
         public void Hit()

@@ -9,26 +9,10 @@ namespace seainvaders
 {
     class Bullet : Entity
     {
-        
-        public override int width
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int height
-        {
-            get
-            {
-                return 4;
-            }
-        }
-
         public Bullet() : base()
         {
             y = 0;
-            sprite = new Bitmap(width, height);
+            sprite = new Bitmap(1,4);
             
             for(int i = 0; i < 4; i++)
             {

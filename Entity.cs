@@ -9,17 +9,54 @@ namespace seainvaders
 {
     abstract class Entity
     {
-        public abstract int width { get; }
-        public abstract int height { get; }
         public int x;
         public int y;
         public Bitmap sprite;
         public event EventHandler Deleted;
         public float scale = 3;
+        public int height
+        {
+            get
+            {
+                return sprite.Height;
+            }
+        }
+        public int width
+        {
+            get
+            {
+                return sprite.Width;
+            }
+        }
 
         public Entity()
         {
             Game.EntityList.Add(this);
+        }
+
+        public Bitmap CharArrayToBitmap(char[,] graphic)
+        {
+            Bitmap outputsprite = new Bitmap(graphic.GetLength(1), graphic.GetLength(0));
+            for (int i = 0; i < graphic.GetLength(0); i++)
+            {
+                for (int j = 0; j < graphic.GetLength(1); j++)
+                {
+                    if (graphic[i, j] == '.')
+                    {
+                        outputsprite.SetPixel(j, i, Color.Transparent);
+                    }
+                    else
+                    {
+                        outputsprite.SetPixel(j, i, Color.DarkSeaGreen);
+                    }
+                }
+            }
+            return outputsprite;
+        }
+
+        public void SetGraphic(char[,] graphic)
+        {
+            sprite = CharArrayToBitmap(graphic);
         }
 
         public virtual void Delete() // virtual is like a placeholder - this is the function that's going to call the event handler

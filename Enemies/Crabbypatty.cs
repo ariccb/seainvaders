@@ -46,22 +46,6 @@ namespace seainvaders
                 return val;
             }
         }
-        public override int height
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int width
-        {
-            get
-            {
-                return 11;
-            }
-        }
-
-
         public Crabbypatty(int x, int y) :base (x,y)
         {
         }

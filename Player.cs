@@ -23,41 +23,12 @@ namespace seainvaders
 
         public int vx;
         public Bullet bullet;
-        public override int height
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int width
-        {
-            get
-            {
-                return 13;
-            }
-        }
-
         public Player() : base()
         {
             vx = 0;
             y = 211;
             x = 105;
-            sprite = new Bitmap(width, height); // homework - try to abstract out this code into all other classes
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    if (graphic[i, j] == '.')
-                    {
-                        sprite.SetPixel(j, i, Color.Transparent);
-                    }
-                    else
-                    {
-                        sprite.SetPixel(j, i, Color.DarkSeaGreen);
-                    }
-                }
-            }
+            SetGraphic(graphic);
         }
         public override void Update()
         {

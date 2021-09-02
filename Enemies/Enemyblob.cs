@@ -16,6 +16,8 @@ namespace seainvaders
         public int frameCount = 0;
         public bool leftToRight;
         public bool moveDown;
+        public Enemy lastMoved;
+        public Enemy secondLastMoved;
         
 
         public Enemyblob()
@@ -57,6 +59,8 @@ namespace seainvaders
             {
                 enemies[i].Deleted += Enemyblob_Deleted; //this is the event listener 
             }
+            lastMoved = enemies[enemies.Count - 1];
+            secondLastMoved = enemies[enemies.Count - 2];
         }
 
         private void Enemyblob_Deleted(object sender, EventArgs e)
@@ -66,12 +70,24 @@ namespace seainvaders
 
         public void Update()
         {
-            
+            int move = 0; // move is holding the integer that is of the enemy that is moving this frame
             bool hitWall;
             if (enemies.Count > 0)
             {
-                int move = frameCount % enemies.Count; // gets the remainder
-                hitWall = enemies[move].Move(leftToRight);
+                if (enemies.FindIndex(x => x == lastMoved) != -1) // if FindIndex doesn't find what it's looking for it outputs -1
+                {
+                    move = enemies.FindIndex(x => x == lastMoved);
+                }
+                else
+                {
+                    move = enemies.FindIndex(x => x == secondLastMoved); // the reason we have secondlastmoved is because we can kill only one enemy per frame, so we're guaranteed to have an enemy left 
+                }
+                move++;
+                if( move >= enemies.Count)
+                {
+                    move = 0;
+                }
+                hitWall = enemies[move].Move(leftToRight); // .Move(leftToRight) is the function that actually moves things
                 if (hitWall)
                 {
                     moveDown = true;
@@ -85,14 +101,9 @@ namespace seainvaders
                     moveDown = false;
                     leftToRight = !leftToRight;
                 }
+                secondLastMoved = lastMoved;
+                lastMoved = enemies[move];
             }
-            foreach (Enemy enemy in enemies)
-            {
-                enemy.Update();
-
-            }
-
-            frameCount++;
         }
     }
 }
