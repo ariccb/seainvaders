@@ -9,7 +9,7 @@ namespace seainvaders
 {
     class Crabbypatty : Enemy
     {
-        public override char[,] graphic0
+        public override char[,] Graphic0
         {
             get
             {
@@ -27,7 +27,7 @@ namespace seainvaders
                 return val;
             }
         }
-        public override char[,] graphic1
+        public override char[,] Graphic1
         {
             get
             {

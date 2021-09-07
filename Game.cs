@@ -27,6 +27,10 @@ namespace seainvaders
             EntityList = new List<Entity>();
             blob = new Enemyblob();
             player = new Player();
+            for (int i = 0; i < 4; i++) // because there are 4 shields
+            {
+                new Shield((i + 1) * (28) + (i * 22), 211 - 32); // shields are 28 pixels apart, and 22 pixels wide
+            }          
             window = canvas;
             keys = new HashSet<string>();
             canvas.Paint += Canvas_Paint; // this is listening for when the window is painted

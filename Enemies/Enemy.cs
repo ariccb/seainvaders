@@ -9,22 +9,41 @@ namespace seainvaders
 {
     abstract class Enemy : Entity // difference to regular class is: Can't make new ones - can't create an 'instance' of an abstract class
     {
-        public abstract char[,] graphic0 { get; } // this is called a "get" function, this is how to get "inheritance"
-        public abstract char[,] graphic1 { get; }
+        public abstract char[,] Graphic0 { get; } // this is called a "get" function, this is how to get "inheritance"
+        public abstract char[,] Graphic1 { get; }
 
-        public Bitmap spriteArmsDown;
-        public Bitmap spriteArmsUp;
-        public bool activeSprite;
-        public int xMove = 2;
-        public int yMove = 8;
+        public Bitmap SpriteArmsDown;
+        public Bitmap SpriteArmsUp;
+        public bool ActiveSprite;
+        public int XMove = 2;
+        public int YMove = 8;
+        public char[,] DeathGraphic
+        {
+            get
+            {
+                char[,] val =
+                {
+                    {'.','.','.','.','.','0','.','.','.','0','.','.','.','.','.','.'},
+                    {'.','.','0','.','.','.','0','.','0','.','.','.','0','.','.','.'},
+                    {'.','.','.','0','.','.','.','.','.','.','.','0','.','.','.','.'},
+                    {'.','.','.','.','0','.','.','.','.','.','0','.','.','.','.','.'},
+                    {'.','0','0','.','.','.','.','.','.','.','.','.','0','0','.','.'},
+                    {'.','.','.','.','0','.','.','.','.','.','0','.','.','.','.','.'},
+                    {'.','.','.','0','.','.','0','.','0','.','.','0','.','.','.','.'},
+                    {'.','.','0','.','.','0','.','.','.','0','.','.','0','.','.','.'}
+                };
+                return val;
+            }
+        }
 
         public Enemy(int x, int y) : base() //this calls the constructor for the parent class
         {
             this.x = x;
             this.y = y;
-            spriteArmsDown = CharArrayToBitmap(graphic0);
-            spriteArmsUp = CharArrayToBitmap(graphic1);
-            sprite = spriteArmsDown;
+            SpriteArmsDown = CharArrayToBitmap(Graphic0);
+            SpriteArmsUp = CharArrayToBitmap(Graphic1);
+            sprite = SpriteArmsDown;
+            SetDeathGraphic(DeathGraphic);
         }
 
         public void Hit()
@@ -34,10 +53,10 @@ namespace seainvaders
 
         public bool Move(bool leftToRight)
         {
-            activeSprite = !activeSprite;
+            ActiveSprite = !ActiveSprite;
 
-            if (leftToRight) { x += xMove; }
-            else { x -= xMove; }
+            if (leftToRight) { x += XMove; }
+            else { x -= XMove; }
 
             if (x <= 0) { return true; }
             if (x >= 208) { return true; }
@@ -47,13 +66,13 @@ namespace seainvaders
 
         public override void Update()
         {
-            if (activeSprite)
+            if (ActiveSprite)
             {
-                sprite = spriteArmsDown;
+                sprite = SpriteArmsDown;
             }
             else
             {
-                sprite = spriteArmsUp;
+                sprite = SpriteArmsUp;
 
             }
         }

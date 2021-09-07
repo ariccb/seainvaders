@@ -38,7 +38,18 @@ namespace seainvaders
                             ((Enemy) entity).Hit(); // static casting needs to be enclosed in brackets to be treated as a single thing
                             Delete();
                         }
-                    }// this checks if entity is of type Enemy
+                    }
+                    else if( entity is Shield)
+                    {
+                        if (IsColliding(entity))
+                        {
+                            int[] location = ((Shield)entity).FindIntersect(this);
+                            if (location[0] != -1)
+                            {
+                                BulletExplosion explosion = new BulletExplosion(x - 4, y - 2);
+                            }
+                        }
+                    }
                 }
             }
         }
