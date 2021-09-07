@@ -47,6 +47,8 @@ namespace seainvaders
                             if (location[0] != -1)
                             {
                                 BulletExplosion explosion = new BulletExplosion(x - 4, y - 2);
+                                ((Shield)entity).Damage(explosion);
+                                Delete();
                             }
                         }
                     }

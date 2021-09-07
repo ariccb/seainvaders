@@ -69,9 +69,9 @@ namespace seainvaders
         {
             int[,] points = {
                 {x, y },                        // 0 top left
-                {(x + width), y },              // 1
-                {x, (y + height) },             // 2
-                {(x + width), (y + height)}     // 3
+                {(x + width), y },              // 1 top right
+                {x, (y + height) },             // 2 bottom left
+                {(x + width), (y + height)}     // 3 bottom right
             };
             return points;
         }
