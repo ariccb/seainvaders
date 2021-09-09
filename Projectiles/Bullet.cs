@@ -35,7 +35,7 @@ namespace seainvaders
                     {
                         if (x <= (entity.x + entity.width) && x >= entity.x && y <= entity.y && y >= (entity.y - entity.height))
                         {
-                            ((Enemy) entity).Hit(); // static casting needs to be enclosed in brackets to be treated as a single thing
+                            ((Enemy)entity).Hit(); // static casting needs to be enclosed in brackets to be treated as a single thing
                             Delete();
                         }
                     }
@@ -43,8 +43,8 @@ namespace seainvaders
                     {
                         if (IsColliding(entity))
                         {
-                            int[] location = ((Shield)entity).FindIntersect(this);
-                            if (location[0] != -1)
+                            int[] location = ((Shield)entity).FindIntersect(this); //looking for a single [x] 
+                            if (location[0] != -1) //if the array location doens't equal -1 (would be above the window extents). 
                             {
                                 BulletExplosion explosion = new BulletExplosion(x - 4, y - 2);
                                 ((Shield)entity).Damage(explosion);
