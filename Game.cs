@@ -18,6 +18,7 @@ namespace seainvaders
         public int rightScore = 0;
         public Enemyblob blob;
         public Player player;
+        public static List<Shield> shields = new List<Shield>();
         // adding too many static methods is considered 'bad coding'. Static methods should be used for things that are global for a class.
         public static HashSet<string> keys;
         public static List<Entity> EntityList;
@@ -29,7 +30,7 @@ namespace seainvaders
             player = new Player();
             for (int i = 0; i < 4; i++) // because there are 4 shields
             {
-                new Shield((i + 1) * (28) + (i * 22), 211 - 32); // shields are 28 pixels apart, and 22 pixels wide
+                shields.Add(new Shield((i + 1) * (28) + (i * 22), 211 - 32)); // shields are 28 pixels apart, and 22 pixels wide
             }          
             window = canvas;
             keys = new HashSet<string>();
@@ -55,11 +56,17 @@ namespace seainvaders
         private void Canvas_KeyPress(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
-            { keys.Add("left"); }             // if the player presses the A key, the velocity is set to -2 (moves to the left at "2-speed")
+            { 
+                keys.Add("left"); 
+            }             // if the player presses the A key, the velocity is set to -2 (moves to the left at "2-speed")
             else if (e.KeyCode == Keys.Right)
-            { keys.Add("right"); }              // if the player presses the A key, the velocity is set to 2 (moves to the right at "2-speed")
+            { 
+                keys.Add("right"); 
+            }              // if the player presses the A key, the velocity is set to 2 (moves to the right at "2-speed")
             else if (e.KeyCode == Keys.Space)
-            { keys.Add("space"); }
+            { 
+                keys.Add("space"); 
+            }
         }
 
         private void Canvas_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
