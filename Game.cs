@@ -86,6 +86,10 @@ namespace seainvaders
             {
                 EntityList[i].Render(graphics);
             }
+            if (blob.Enemies.Count <= 0)
+            {
+                graphics.DrawString("Player Wins!", bigscoreFont, new SolidBrush(Color.DarkSeaGreen), new PointF(((Form1.ActiveForm.Size.Width / 2) - 200), (Form1.ActiveForm.Size.Height / 2)));
+            }
         }
 
        public void GameLoop()
