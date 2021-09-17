@@ -23,6 +23,8 @@ namespace seainvaders
 
         public int vx;
         public Bullet bullet;
+        public int lives = 3;
+
         public Player() : base()
         {
             vx = 0;
@@ -63,6 +65,14 @@ namespace seainvaders
         private void Bullet_Deleted(object sender, EventArgs e)
         {
             bullet = null; //this deletes the bullet
+        }
+
+        public void Hit()
+        {
+            if (--lives <= 0)
+            {
+                Delete();
+            }
         }
     }
 }

@@ -18,6 +18,10 @@ namespace seainvaders
         public bool MoveDown;
         public Enemy LastMoved;
         public Enemy SecondLastMoved;
+        private Spiral spiral = null;
+        private Plunger plunger = null;
+        private Squiggly squiggly = null;
+        private Random rnd = new Random();
         
 
         public Enemyblob()
@@ -68,6 +72,21 @@ namespace seainvaders
             Enemies.Remove((Enemy) sender); // static cast this sender as an Enemy 
         }
 
+        private void Squiggly_Deleted(object sender, EventArgs e)
+        {
+            squiggly = null;
+        }
+
+        private void Plunger_Deleted(object sender, EventArgs e)
+        {
+            plunger = null;
+        }
+
+        private void Spiral_Deleted(object sender, EventArgs e)
+        {
+            spiral = null;
+        }
+
         public void Update()
         {
             int move = 0; // move is holding the integer that is of the enemy that is moving this frame
@@ -103,6 +122,22 @@ namespace seainvaders
                 }
                 SecondLastMoved = LastMoved;
                 LastMoved = Enemies[move];
+                Enemy firing = Enemies[rnd.Next(Enemies.Count)];
+                if (rnd.Next(3) == 0 && spiral == null)
+                {
+                    spiral = new Spiral(firing.x + (firing.width - 3) / 2, firing.y + firing.height);
+                    spiral.Deleted += Spiral_Deleted;
+                }
+                if (rnd.Next(3) == 1 && plunger == null)
+                {
+                    plunger = new Plunger(firing.x + (firing.width - 3) / 2, firing.y + firing.height);
+                    plunger.Deleted += Plunger_Deleted;
+                }
+                if (rnd.Next(3) == 2 && squiggly == null)
+                {
+                    squiggly = new Squiggly(firing.x + (firing.width - 3) / 2, firing.y + firing.height);
+                    squiggly.Deleted += Squiggly_Deleted;
+                }
             }
         }
     }

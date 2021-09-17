@@ -146,15 +146,13 @@ namespace seainvaders
             int relativeY = 0; 
             int j = Y1Start;
             int j2 = Y2Start;
-            for (; relativeY < YOverlap; relativeY++, j++, j2++) // this is the key for this function 
+            for (; relativeY < YOverlap; relativeY++, j++, j2++) // iterating through both the shield and bullet sprites' y values pixel by pixel 
             {
-
                 int relativeX = 0; 
                 int i = X1Start;
                 int i2 = X2Start;
                 for (; relativeX < XOverlap; relativeX++, i++, i2++)
                 {
-
                     if((this.sprite.GetPixel(i, j).A != Color.Transparent.A) && (explosion.sprite.GetPixel(i2, j2).A != Color.Transparent.A))
                     {
                         this.sprite.SetPixel(i, j, Color.Transparent);

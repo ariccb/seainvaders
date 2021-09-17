@@ -22,12 +22,14 @@ namespace seainvaders
         // adding too many static methods is considered 'bad coding'. Static methods should be used for things that are global for a class.
         public static HashSet<string> keys;
         public static List<Entity> EntityList;
+        private ManualResetEvent pause = new ManualResetEvent(true);
 
         public Game(Canvas canvas)
         {
             EntityList = new List<Entity>();
             blob = new Enemyblob();
             player = new Player();
+            player.Deleted += Player_Deleted;
             for (int i = 0; i < 4; i++) // because there are 4 shields
             {
                 shields.Add(new Shield((i + 1) * (28) + (i * 22), 211 - 32)); // shields are 28 pixels apart, and 22 pixels wide
@@ -40,6 +42,16 @@ namespace seainvaders
             gameLoopThread.Start();
             canvas.KeyDown += Canvas_KeyPress;
             canvas.KeyUp += Canvas_KeyRelease;
+
+        }
+
+        private void Player_Deleted(object sender, EventArgs e)
+        {
+            player = null;
+            if (!pause.WaitOne(0))
+            {
+                pause.Reset();
+            }
         }
 
         private void Canvas_KeyRelease(object sender, KeyEventArgs e)
@@ -97,6 +109,7 @@ namespace seainvaders
             while (gameLoopThread.IsAlive && !canvasClosed) // the && checks for a logical condition  - if canvasClosed is NOT closed
             {
                 window.BeginInvoke((MethodInvoker)delegate { window.Refresh(); });
+                pause.WaitOne();
                 Thread.Sleep(1);
             }
         }
